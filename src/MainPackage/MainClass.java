@@ -1,22 +1,20 @@
 package MainPackage;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainClass {
 
-    /**Pass as parameters D, dimension of grid
-     * and R(range of sensor)
+    /**Pass as parameters D(dimension of grid)
+     * and R(range of sensor). Pass as terminal parameters if there is time
     **/
+    final static int D = 4;
+    final static double R = 1.5;
+
     public static void main(String [ ] args){
 
-        int D = 8;
-        double R = 1.5;
-
-        ArrayList[][] gridMaker = new ArrayList[D][D];
-        ArrayList<Node> gridTest = new ArrayList<>();
-        //Node n = new Node[D][D];
-
+        /**
+         * At the start overwrite topology.txt if exists
+         */
         FileCreator fc = new FileCreator();
         fc.FileInitCreator();
 
@@ -24,17 +22,15 @@ public class MainClass {
 
         int[][] coor = new int[D][D];
 
-
         for(int i = 0; i < D; i++){
             for(int j = 0; j < D; j++){
-                //gridMaker
+                /**
+                 * Could implement in another way but we used 2D array to approach
+                 * grid layout. Node counter is the id of every Node
+                 */
                 coor[i][j] = node_counter;
-                //Node gridPos = new Node(node_counter,gridMaker);
-                Node gridPos = new Node(coor[i][j]);
-                //Node n = gridMaker[i][j];
-                //gridMaker[i][j] = node_counter;
+                Node gridPos = new Node(coor[i][j], D);
                 gridPos.checkNeighbours(i,j,D,R);
-                //System.out.println(gridPos.neighbours.size());
 
                 node_counter++;
             }
