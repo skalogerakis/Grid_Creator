@@ -39,7 +39,7 @@ public class FileCreator {
 
         try{
             FileOutputStream fsout = new FileOutputStream(directory.getCanonicalPath() + File.separator + "topology.txt",true);
-            String data = currNode+" "+neighNode+" -50.0"+"\n";
+            String data = currNode+" "+neighNode+" 0"+"\n";
             fsout.write(data.getBytes());
 
         }catch(IOException io){
