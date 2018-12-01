@@ -1,14 +1,18 @@
 package MainPackage;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class MainClass {
 
     /**Pass as parameters D(dimension of grid)
      * and R(range of sensor). Pass as terminal parameters if there is time
     **/
-    final static int D = 4;
-    final static double R = 1.5;
+    //final static int D = 4;
+    static int D;
+    static float R;
+    //final static double R = 1.5;
 
     public static void main(String [ ] args){
 
@@ -17,6 +21,29 @@ public class MainClass {
          */
         FileCreator fc = new FileCreator();
         fc.FileInitCreator();
+
+        Scanner reader = new Scanner(System.in);
+
+        try{
+            System.out.println("Enter D(dimension of grid):" );
+            D = reader.nextInt();
+
+            /**
+             * Input for Range must be float otherwise the program
+             * will fail. ex 1.5 will fail, 1,5 will run as expected
+             */
+            System.out.println("Enter R(range):" );
+            R = reader.nextFloat();
+        }catch (InputMismatchException io){
+            System.out.println("Non valid input was given. Terminating.....");
+            System.exit(-1);
+        }
+
+
+        if(D <= 0 || R <= 0){
+            System.out.println("Non valid grid dimension or range was given. Terminating.....");
+            System.exit(-1);
+        }
 
         int node_counter=0;
 
